@@ -506,22 +506,140 @@
     .sr { opacity:0; transform:translateY(28px); transition:opacity .55s ease, transform .55s ease; }
     .sr.in { opacity:1; transform:none; }
 
-    /* ── RESPONSIVE ────────────────────────── */
-    @media(max-width:900px){
-      .nav-links { display:none; }
-      .hero-content h1 { font-size:2rem; }
-      .hero-illustration { display:none; }
-      .quick-bar { grid-template-columns:repeat(2,1fr); }
-      .about { grid-template-columns:1fr; }
-      .about-img { min-height:260px; }
-      .contact-band { grid-template-columns:1fr; gap:2rem; }
-      footer { grid-template-columns:1fr 1fr; }
-      .ft-brand { grid-column:1/-1; }
+    /* ── HAMBURGER ─────────────────────────── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px; height: 36px;
+      cursor: pointer;
+      margin-left: auto;
+      background: none; border: none; padding: 4px;
     }
-    @media(max-width:560px){
-      .spec-grid { grid-template-columns:repeat(2,1fr); }
-      .doctors-grid { grid-template-columns:1fr 1fr; }
-      footer { grid-template-columns:1fr; }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--ind); border-radius: 2px;
+      transition: transform .3s, opacity .3s;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .nav-mobile-menu {
+      display: none;
+      position: fixed; top: 70px; left: 0; right: 0;
+      background: var(--white);
+      box-shadow: 0 8px 24px rgba(0,0,0,.12);
+      z-index: 199;
+      flex-direction: column;
+      padding: 1.2rem 5%;
+      gap: .2rem;
+    }
+    .nav-mobile-menu.open { display: flex; }
+    .nav-mobile-menu a {
+      font-size: .9rem; font-weight: 600; color: var(--text);
+      padding: .75rem 0;
+      border-bottom: 1px solid var(--gray2);
+      display: block;
+    }
+    .nav-mobile-menu a:last-child { border-bottom: none; }
+    .nav-mobile-menu .nav-btn {
+      margin-top: .6rem;
+      display: block !important;
+      text-align: center;
+      line-height: 42px !important;
+      height: 42px;
+    }
+
+    /* ── RESPONSIVE ────────────────────────── */
+    @media (max-width: 900px) {
+      /* Navbar */
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+
+      /* Hero */
+      .hero { height: 340px; }
+      .hero-content h1 { font-size: clamp(1.6rem, 5vw, 2.2rem); }
+      .hero-content p { font-size: .82rem; }
+      .hero-illustration { display: none; }
+      .hero-bg {
+        background: linear-gradient(
+          to right,
+          rgba(49,39,131,.95) 0%,
+          rgba(49,39,131,.85) 40%,
+          rgba(49,39,131,.55) 70%,
+          rgba(49,39,131,.15) 100%
+        );
+      }
+
+      /* Quick bar */
+      .quick-bar { grid-template-columns: repeat(2, 1fr); padding: .8rem 4%; }
+
+      /* Specialties */
+      .spec-grid { grid-template-columns: repeat(4, 1fr); }
+
+      /* About */
+      .about { grid-template-columns: 1fr; }
+      .about-img { min-height: 260px; }
+      .about-text { padding: 2.5rem 5%; }
+
+      /* Doctors */
+      .doctors-grid { grid-template-columns: repeat(2, 1fr); }
+
+      /* Contact */
+      .contact-band { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 5%; }
+
+      /* Footer */
+      footer { grid-template-columns: 1fr 1fr; }
+      .ft-brand { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 600px) {
+      /* Navbar */
+      .navbar { padding: 0 5%; }
+
+      /* Hero */
+      .hero { height: auto; min-height: 300px; padding: 3rem 0 2.5rem; align-items: center; }
+      .hero-content { padding: 0 6%; }
+      .hero-content h1 { font-size: 1.65rem; line-height: 1.2; }
+      .hero-content p { font-size: .78rem; margin-bottom: 1.5rem; }
+      .hero-btn { font-size: .8rem; padding: .7rem 1.5rem; }
+
+      /* Quick bar */
+      .quick-bar { grid-template-columns: repeat(2, 1fr); gap: .4rem; padding: .7rem 3%; }
+      .quick-icon { width: 48px; height: 48px; }
+      .quick-icon svg { width: 24px; height: 24px; }
+      .quick-label { font-size: .65rem; }
+
+      /* Specialties */
+      .specialties { padding: 2.5rem 5%; }
+      .specialties h2 { font-size: 1.4rem; margin-bottom: 1.5rem; }
+      .spec-grid { grid-template-columns: repeat(2, 1fr); gap: .4rem .8rem; max-width: 100%; }
+      .spec-card { padding: .7rem .4rem; }
+      .spec-icon-wrap { width: 40px; height: 40px; }
+      .spec-icon-wrap svg { width: 20px; height: 20px; }
+      .spec-name { font-size: .78rem; }
+
+      /* About */
+      .about-text h2 { font-size: 1.5rem; }
+      .about-text p { font-size: .78rem; }
+
+      /* Doctors */
+      .doctors { padding: 2.5rem 5%; }
+      .section-hd-left h2 { font-size: 1.4rem; }
+      .doctors-grid { grid-template-columns: repeat(2, 1fr); gap: .8rem; max-width: 100%; }
+      .doc-photo { height: 140px; font-size: 3.5rem; }
+      .doc-name { font-size: .78rem; }
+
+      /* Contact form */
+      .fg-row { grid-template-columns: 1fr; }
+      .contact-band h2 { font-size: 1.4rem; }
+
+      /* Footer */
+      footer { grid-template-columns: 1fr; gap: 1.8rem; padding: 2rem 5% 1.2rem; }
+      .ft-brand { grid-column: auto; }
+      .ft-bottom { flex-direction: column; gap: .5rem; text-align: center; }
     }
   </style>
 </head>
@@ -542,7 +660,19 @@
     <li><a href="#blog">Blog</a></li>
     <li><a href="#contacto" class="nav-btn">Agendar Cita Online</a></li>
   </ul>
+
+  <button class="nav-hamburger" id="hamburger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="#nosotros" class="mobile-link">Nosotros</a>
+  <a href="#especialidades" class="mobile-link">Especialidades</a>
+  <a href="#medicos" class="mobile-link">Médicos</a>
+  <a href="#blog" class="mobile-link">Blog</a>
+  <a href="#contacto" class="nav-btn mobile-link">Agendar Cita Online</a>
+</div>
 
 <!-- ══════════════ HERO ══════════════ -->
 <section id="inicio" class="hero">
@@ -950,6 +1080,20 @@
     nav.style.boxShadow = window.scrollY > 10
       ? '0 4px 28px rgba(0,0,0,.13)'
       : '0 2px 16px rgba(0,0,0,.08)';
+  });
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    });
   });
 </script>
 </body>
