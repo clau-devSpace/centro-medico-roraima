@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Centro Medico Integral Roraima</title>
+  <title>Centro Médico Integral Roraima</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Verdana&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet" />
 
   <style>
     /* ── TOKENS ─────────────────────────────── */
@@ -225,11 +225,15 @@
     }
     .study-grid {
       display:grid;
-      grid-template-columns:repeat(4, 1fr);
+      grid-template-columns:repeat(6, 1fr);
       gap:1.4rem;
-      max-width: 1040px;
+      max-width: 960px;
       margin: 0 auto;
     }
+    .study-grid > .study-card { grid-column: span 2; }
+    /* Fila de abajo: 2 tarjetas centradas */
+    .study-grid > .study-card:nth-child(4) { grid-column: 2 / span 2; }
+    .study-grid > .study-card:nth-child(5) { grid-column: 4 / span 2; }
     .study-card {
       background:var(--white);
       border-radius:14px;
@@ -641,6 +645,69 @@
       transition:all .22s;
     }
     .submit-btn:hover { background:var(--white); color:var(--ind); transform:translateY(-2px); }
+    .submit-btn:disabled { opacity:.65; cursor:wait; transform:none; background:var(--tq); color:var(--white); }
+    .fg .is-invalid { border-color:#ff8a8a; background:rgba(255,90,90,.08); }
+    .hp-field { position:absolute; left:-9999px; width:1px; height:1px; opacity:0; }
+    .form-status {
+      font-family:var(--fa); font-size:.74rem; line-height:1.5;
+      margin-top:.8rem; min-height:1.1em; text-align:center;
+    }
+    .form-status.ok  { color:#7ee8c8; }
+    .form-status.err { color:#ffb3b3; }
+
+    /* ── FUNDADORES ────────────────────────── */
+    .founders {
+      background:var(--gray);
+      padding:4.5rem 4% 5rem;
+      text-align:center;
+    }
+    .founders-eyebrow {
+      font-family:var(--fa); font-size:.72rem; font-weight:700;
+      text-transform:uppercase; letter-spacing:.15em; color:var(--tq);
+      margin-bottom:.5rem;
+    }
+    .founders h2 {
+      font-size:2.15rem; font-weight:900; color:var(--ind);
+      letter-spacing:-.01em; margin-bottom:.7rem;
+    }
+    .founders-intro {
+      font-family:var(--fa); font-size:.82rem; line-height:1.7;
+      color:var(--muted); max-width:540px; margin:0 auto 2.8rem;
+    }
+    .founders-grid {
+      display:grid; grid-template-columns:repeat(4, 1fr);
+      gap:1.8rem; max-width:1040px; margin:0 auto;
+    }
+    .founder-card {
+      background:var(--white);
+      border-radius:16px; overflow:hidden;
+      border:1px solid var(--gray2);
+      box-shadow:var(--sh);
+      transition:transform .25s ease, box-shadow .25s ease;
+    }
+    .founder-card:hover { transform:translateY(-6px); box-shadow:var(--sh2); }
+    .founder-photo {
+      position:relative; aspect-ratio:4 / 5; overflow:hidden;
+      background:linear-gradient(145deg,#e8f4f8,#d0eaf2);
+    }
+    .founder-photo img {
+      width:100%; height:100%; object-fit:cover; object-position:center 20%;
+      transition:transform .5s ease;
+    }
+    .founder-card:hover .founder-photo img { transform:scale(1.04); }
+    .founder-photo::after {
+      content:''; position:absolute; left:0; right:0; bottom:0;
+      height:4px; background:var(--tq);
+    }
+    .founder-info { padding:1.3rem 1.2rem 1.5rem; }
+    .founder-name {
+      font-size:1.08rem; font-weight:800; color:var(--ind);
+      margin-bottom:.3rem;
+    }
+    .founder-role {
+      font-family:var(--fa); font-size:.66rem; font-weight:700;
+      text-transform:uppercase; letter-spacing:.1em; color:var(--tq);
+    }
 
     /* ── FOOTER ────────────────────────────── */
     footer {
@@ -653,6 +720,7 @@
       display:flex; align-items:center; gap:.55rem; margin-bottom:.9rem;
     }
     .ft-brand .ft-logo svg { width:34px; height:30px; }
+    .ft-brand .ft-logo img { width:160px; height:auto; }
     .ft-brand .ft-logo b {
       font-size:1.05rem; font-weight:900; color:var(--tq);
       text-transform:uppercase; letter-spacing:.06em;
@@ -755,7 +823,10 @@
       }
 
       /* Estudios */
-      .study-grid { grid-template-columns: repeat(2, 1fr); }
+      .study-grid { grid-template-columns: repeat(4, 1fr); }
+      .study-grid > .study-card,
+      .study-grid > .study-card:nth-child(4) { grid-column: span 2; }
+      .study-grid > .study-card:nth-child(5) { grid-column: 2 / span 2; }
       .spec-grid  { grid-template-columns: repeat(3, 1fr); }
 
       /* About */
@@ -768,6 +839,10 @@
 
       /* Contact */
       .contact-band { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 5%; }
+
+      /* Fundadores */
+      .founders-grid { grid-template-columns: repeat(2, 1fr); gap: 1.2rem; max-width: 640px; }
+      .founder-name { font-size: .95rem; }
 
       /* Footer */
       footer { grid-template-columns: 1fr 1fr; }
@@ -789,6 +864,9 @@
       .studies { padding: 2.8rem 5% 3rem; }
       .studies h2 { font-size: 1.4rem; }
       .study-grid { grid-template-columns: 1fr; gap: 1rem; max-width: 420px; }
+      .study-grid > .study-card,
+      .study-grid > .study-card:nth-child(4),
+      .study-grid > .study-card:nth-child(5) { grid-column: auto; }
       .study-card { padding: 1.7rem 1.4rem 1.5rem; }
 
       /* Solapas */
@@ -828,6 +906,11 @@
       .fg-row { grid-template-columns: 1fr; }
       .contact-band h2 { font-size: 1.4rem; }
 
+      /* Fundadores */
+      .founders { padding: 2.8rem 5% 3.2rem; }
+      .founders h2 { font-size: 1.4rem; }
+      .founders-grid { grid-template-columns: 1fr; gap: 1.2rem; max-width: 360px; }
+
       /* Footer */
       footer { grid-template-columns: 1fr; gap: 1.8rem; padding: 2rem 5% 1.2rem; }
       .ft-brand { grid-column: auto; }
@@ -841,7 +924,7 @@
 <nav class="navbar">
   <a href="#inicio" class="nav-logo">
     <div class="nav-logo-txt">
-      <img src="images/logo-roraima.png">
+      <img src="images/logo-roraima.png" alt="Centro Médico Integral Roraima">
     </div>
   </a>
 
@@ -907,7 +990,7 @@
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
         </svg>
       </span>
-      <span class="hci-label">Medicina del Sueño</span>
+      <span class="hci-label">Neurofisiología Clínica</span>
     </div>
   </aside>
 </section>
@@ -976,7 +1059,8 @@
      <article class="study-card">
       <div class="study-icon">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          <circle cx="12" cy="8.5" r="5.5"/>
+          <path d="M12 14v7"/><path d="M8.5 18h7"/>
         </svg>
       </div>
       <h3 class="study-name">Ginecológicos</h3>
@@ -1192,7 +1276,7 @@
     <p class="about-tag">Sobre Nosotros</p>
     <h2>Nuestra Misión</h2>
     <p>
-      Ser un centro medico abocado a la
+      Ser un centro médico abocado a la
       atención primaria de salud que combine
       calidad, profesionalismo, accesibilidad y
       organización eficiente, brindando
@@ -1225,21 +1309,21 @@
         <div class="crow-ic">📍</div>
         <div class="crow-info">
           <strong>Dirección</strong>
-          <span>Av. Principal 123, Ciudad, País</span>
+          <span>Calle Honduras 105, Localidad de Merlo</span>
         </div>
       </div>
       <div class="crow">
         <div class="crow-ic">📞</div>
         <div class="crow-info">
           <strong>Teléfono</strong>
-          <span>+54 123 456 7890</span>
+          <span>220 471 2013</span>
         </div>
       </div>
       <div class="crow">
         <div class="crow-ic">📧</div>
         <div class="crow-info">
           <strong>Email</strong>
-          <span>turnos@centromedico-roraima.com</span>
+          <span>cmedicororaima@gmail.com</span>
         </div>
       </div>
       <div class="crow">
@@ -1252,41 +1336,96 @@
     </div>
   </div>
 
-  <div class="contact-form sr">
+  <form class="contact-form sr" id="turnoForm" novalidate>
     <div class="form-heading">✚ &nbsp;Solicitar turno</div>
     <div class="fg-row">
       <div class="fg">
-        <label>Nombre</label>
-        <input type="text" placeholder="Tu nombre"/>
+        <label for="f-nombre">Nombre</label>
+        <input id="f-nombre" name="nombre" type="text" placeholder="Tu nombre" required/>
       </div>
       <div class="fg">
-        <label>Apellido</label>
-        <input type="text" placeholder="Tu apellido"/>
+        <label for="f-apellido">Apellido</label>
+        <input id="f-apellido" name="apellido" type="text" placeholder="Tu apellido" required/>
       </div>
     </div>
     <div class="fg">
-      <label>Email</label>
-      <input type="email" placeholder="tu@email.com"/>
+      <label for="f-email">Email</label>
+      <input id="f-email" name="email" type="email" placeholder="tu@email.com" required/>
     </div>
     <div class="fg">
-      <label>Teléfono</label>
-      <input type="tel" placeholder="+54 000 000 0000"/>
+      <label for="f-telefono">Teléfono</label>
+      <input id="f-telefono" name="telefono" type="tel" placeholder="+54 000 000 0000" required/>
     </div>
     <div class="fg">
-      <label>Tipo de estudio</label>
-      <select>
+      <label for="f-estudio">Tipo de estudio</label>
+      <select id="f-estudio" name="estudio" required>
         <option value="" disabled selected>Seleccioná un estudio</option>
         <option>Ecografías</option>
         <option>Estudios Cardiológicos</option>
-        <option>Medicina del Sueño</option>
+        <option>Neurofisiología Clínica</option>
+        <option>Estudios Ginecológicos</option>
         <option>Otro / A consultar</option>
       </select>
     </div>
     <div class="fg">
-      <label>Mensaje (opcional)</label>
-      <textarea placeholder="Contanos brevemente tu consulta..."></textarea>
+      <label for="f-mensaje">Mensaje (opcional)</label>
+      <textarea id="f-mensaje" name="mensaje" placeholder="Contanos brevemente tu consulta..."></textarea>
     </div>
-    <button class="submit-btn">Enviar solicitud →</button>
+    <!-- Campo trampa anti-spam: invisible para personas, los bots suelen completarlo -->
+    <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true"/>
+    <button type="submit" class="submit-btn" id="turnoSubmit">Enviar solicitud →</button>
+    <p class="form-status" id="turnoStatus" role="status" aria-live="polite"></p>
+  </form>
+</section>
+
+<!-- ══════════════ FUNDADORES ══════════════ -->
+<section id="fundadores" class="founders">
+  <p class="founders-eyebrow">Quiénes somos</p>
+  <h2>Nuestros Fundadores</h2>
+  <p class="founders-intro">Las personas que hicieron posible Roraima y que trabajan cada día para brindarte una atención de calidad.</p>
+
+  <div class="founders-grid sr">
+
+    <article class="founder-card">
+      <div class="founder-photo">
+        <img src="images/fundador-3.jpeg" alt="Fundadora del Centro Médico Roraima">
+      </div>
+      <div class="founder-info">
+        <h3 class="founder-name">Dra. Luisa Malavé</h3>
+        <p class="founder-role">Directora Médica</p>
+      </div>
+    </article>
+
+     <article class="founder-card">
+      <div class="founder-photo">
+        <img src="images/fundador-4.jpeg" alt="Fundadora del Centro Médico Roraima">
+      </div>
+      <div class="founder-info">
+        <h3 class="founder-name">Dra. Raiza Rivas</h3>
+        <p class="founder-role">Sub Directora Médica</p>
+      </div>
+    </article>
+
+    <article class="founder-card">
+      <div class="founder-photo">
+        <img src="images/fundador-2.jpeg" alt="Fundador del Centro Médico Roraima">
+      </div>
+      <div class="founder-info">
+        <h3 class="founder-name">Dr. Anthony Rojas</h3>
+        <p class="founder-role">Gerente</p>
+      </div>
+    </article>
+
+    <article class="founder-card">
+      <div class="founder-photo">
+        <img src="images/fundador-1.jpeg" alt="Fundadora del Centro Médico Roraima">
+      </div>
+      <div class="founder-info">
+        <h3 class="founder-name">Dra. Susana Malavé</h3>
+        <p class="founder-role">Sub Gerente</p>
+      </div>
+    </article>
+
   </div>
 </section>
 
@@ -1294,7 +1433,7 @@
 <footer>
   <div class="ft-brand">
     <div class="ft-logo">
-     <img src="images/logo-roraima.png">
+     <img src="images/logo-roraima.png" alt="Centro Médico Integral Roraima">
     </div>
     <p>Centro Médico Roraima, comprometidos con tu salud y bienestar. Atención de excelencia para toda la familia.</p>
   </div>
@@ -1314,7 +1453,8 @@
     <ul>
       <li><a href="#estudios">Ecografías</a></li>
       <li><a href="#estudios">Estudios Cardiológicos</a></li>
-      <li><a href="#estudios">Medicina del Sueño</a></li>
+      <li><a href="#estudios">Neurofisiología Clínica</a></li>
+      <li><a href="#estudios">Estudios Ginecológicos</a></li>
       <li><a href="#estudios">Otros / A consultar</a></li>
     </ul>
   </div>
@@ -1322,10 +1462,10 @@
   <div class="ft-col">
     <h4>Contacto</h4>
     <ul>
-      <li><a href="tel:+541234567890">+54 123 456 7890</a></li>
-      <li><a href="mailto:turnos@centromedico-roraima.com">turnos@centromedico-roraima.com</a></li>
-      <li><a href="#contacto">Av. Principal 123</a></li>
-      <li><a href="#contacto">Lun–Vie 8–20hs</a></li>
+      <li><a href="+542204712013">220 471 2013</a></li>
+      <li><a href="mailto:cmedicororaima@gmail.com">cmedicororaima@gmail.com</a></li>
+      <li><a href="#contacto">Calle Honduras 105, Localidad de Merlo</a></li>
+      <li><a href="#contacto">un–Vie 8:00–20:00 · Sáb 8:00–14:00</a></li>
     </ul>
   </div>
 
@@ -1425,6 +1565,91 @@
       hamburger.classList.remove('open');
       mobileMenu.classList.remove('open');
     });
+  });
+</script>
+
+<!-- EmailJS (SDK oficial para navegador) -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+  /* ══════════════ EMAILJS: FORMULARIO DE TURNOS ══════════════ */
+  
+  const EMAILJS_PUBLIC_KEY  = 'RkfmtJuFyfOOM7cUf';
+  const EMAILJS_SERVICE_ID  = 'service_fyjrjba';
+  const EMAILJS_TEMPLATE_ID = 'template_08sukod';
+
+  if (window.emailjs) {
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+  }
+
+  const turnoForm   = document.getElementById('turnoForm');
+  const turnoSubmit = document.getElementById('turnoSubmit');
+  const turnoStatus = document.getElementById('turnoStatus');
+  const BTN_LABEL   = turnoSubmit.textContent;
+
+  function setStatus(msg, type) {
+    turnoStatus.textContent = msg;
+    turnoStatus.className = 'form-status' + (type ? ' ' + type : '');
+  }
+
+  function validarFormulario() {
+    let valido = true;
+    turnoForm.querySelectorAll('[required]').forEach(campo => {
+      let ok = campo.value.trim() !== '' && campo.checkValidity();
+      if (ok && campo.type === 'email') ok = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(campo.value.trim());
+      campo.classList.toggle('is-invalid', !ok);
+      if (!ok) valido = false;
+    });
+    return valido;
+  }
+
+  // Quita el marcado de error apenas el usuario corrige el campo
+  turnoForm.querySelectorAll('input, select, textarea').forEach(campo => {
+    campo.addEventListener('input',  () => campo.classList.remove('is-invalid'));
+    campo.addEventListener('change', () => campo.classList.remove('is-invalid'));
+  });
+
+  turnoForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    setStatus('');
+
+    // Si el campo trampa tiene algo, es un bot: no enviamos nada
+    if (turnoForm.website.value) return;
+
+    if (!validarFormulario()) {
+      setStatus('Revisá los campos marcados: todos son obligatorios salvo el mensaje.', 'err');
+      return;
+    }
+    if (!window.emailjs) {
+      setStatus('No se pudo cargar el servicio de envío. Probá de nuevo en unos minutos.', 'err');
+      return;
+    }
+
+    turnoSubmit.disabled = true;
+    turnoSubmit.textContent = 'Enviando…';
+
+    // Estos nombres son las variables que usás en la plantilla de EmailJS: {{nombre}}, {{email}}, etc.
+    const datos = {
+      nombre:   turnoForm.nombre.value.trim(),
+      apellido: turnoForm.apellido.value.trim(),
+      email:    turnoForm.email.value.trim(),
+      telefono: turnoForm.telefono.value.trim(),
+      estudio:  turnoForm.estudio.value,
+      mensaje:  turnoForm.mensaje.value.trim() || '(sin mensaje)',
+      fecha:    new Date().toLocaleString('es-AR', { dateStyle: 'long', timeStyle: 'short' }),
+    };
+
+    try {
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, datos);
+      turnoForm.reset();
+      setStatus('¡Gracias! Recibimos tu solicitud y te contactaremos a la brevedad.', 'ok');
+    } catch (err) {
+      console.error('EmailJS error:', err);
+      setStatus('No pudimos enviar tu solicitud. Intentá nuevamente o llamanos al 220 471 2013.', 'err');
+    } finally {
+      turnoSubmit.disabled = false;
+      turnoSubmit.textContent = BTN_LABEL;
+    }
   });
 </script>
 </body>
